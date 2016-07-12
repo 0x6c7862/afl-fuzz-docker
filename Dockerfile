@@ -21,7 +21,12 @@ RUN apt-get install -y --no-install-recommends --no-install-suggests \
   && cd /usr/local/src \
   && wget 'http://lcamtuf.coredump.cx/afl/releases/afl-2.19b.tgz' -O- | tar zxvf - \
   && cd afl-* \
-  && sed -rie 's/\\x1b\[1;90m/\\x1b[1;96m/' debug.h \
+  && sed -rie 's/^(#[[:space:]]*define[[:space:]]+KEEP_UNIQUE_CRASH[[:space:]]+).*$/\120000/' config.h \
+  && sed -rie 's/^(#[[:space:]]*define[[:space:]]+KEEP_UNIQUE_HANG[[:space:]]+).*$/\120000/' config.h \
+  && sed -rie 's/^(#[[:space:]]*define[[:space:]]+PLOT_UPDATE_SEC[[:space:]]+).*$/\1900/' config.h \
+  && sed -rie 's/^(#[[:space:]]*define[[:space:]]+STATS_UPDATE_SEC[[:space:]]+).*$/\1900/' config.h \
+  && sed -rie 's/^(#[[:space:]]*define[[:space:]]+UI_TARGET_HZ[[:space:]]+).*$/\11/' config.h \
+  && sed -rie 's/^(#[[:space:]]*define[[:space:]]+USE_COLOR.*$)/\/* \1 *\//' config.h \
   && make \
   && cd llvm_mode \
   && make \
