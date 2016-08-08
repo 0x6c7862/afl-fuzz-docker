@@ -30,6 +30,10 @@ RUN apt-get install -y --no-install-recommends --no-install-suggests \
   && make \
   && cd llvm_mode \
   && make \
+  && cd ../libdislocator \
+  && make \
+  && cd ../libtokencap \
+  && make \
   && cd .. \
   && make install \
   && apt-get clean -y && rm -rf /var/lib/apt/lists/*
