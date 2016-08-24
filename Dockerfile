@@ -19,7 +19,7 @@ RUN apt-get install -y --no-install-recommends --no-install-suggests \
     tar \
     wget \
   && cd /usr/local/src \
-  && wget 'http://lcamtuf.coredump.cx/afl/releases/afl-2.31b.tgz' -O- | tar zxvf - \
+  && wget 'http://lcamtuf.coredump.cx/afl/releases/afl-2.32b.tgz' -O- | tar zxvf - \
   && cd afl-* \
   && sed -rie 's/^(#[[:space:]]*define[[:space:]]+KEEP_UNIQUE_CRASH[[:space:]]+).*$/\120000/' config.h \
   && sed -rie 's/^(#[[:space:]]*define[[:space:]]+KEEP_UNIQUE_HANG[[:space:]]+).*$/\120000/' config.h \
