@@ -1,9 +1,11 @@
 FROM ubuntu:latest
 
-RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends --no-install-suggests \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update -y \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    --no-install-suggests \
     autoconf \
     automake \
+    bison \
     build-essential \
     ca-certificates \
     clang \
@@ -11,12 +13,11 @@ RUN apt-get install -y --no-install-recommends --no-install-suggests \
     g++ \
     gcc \
     git \
-    gzip \
     libtool \
+    libtool-bin \
+    libglib2.0-dev \
     make \
     nasm \
-    procps \
-    tar \
     wget \
   && cd /usr/local/src \
   && wget 'http://lcamtuf.coredump.cx/afl/releases/afl-2.36b.tgz' -O- | tar zxvf - \
@@ -30,13 +31,16 @@ RUN apt-get install -y --no-install-recommends --no-install-suggests \
   && make \
   && cd llvm_mode \
   && make \
+  && cd ../qemu_mode \
+  && ./build_qemu_support.sh \
   && cd ../libdislocator \
   && make \
   && cd ../libtokencap \
   && make \
   && cd .. \
   && make install \
-  && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+  && apt-get clean -y \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV AFL_EXIT_WHEN_DONE=1
 ENV AFL_HARDEN=1
