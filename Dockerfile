@@ -20,7 +20,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -y \
     nasm \
     wget \
   && cd /usr/local/src \
-  && wget 'http://lcamtuf.coredump.cx/afl/releases/afl-2.51b.tgz' -O- | tar zxvf - \
+  && wget 'http://lcamtuf.coredump.cx/afl/releases/afl-2.52b.tgz' -O- | tar zxvf - \
   && cd afl-* \
   && sed -rie 's/^(#[[:space:]]*define[[:space:]]+KEEP_UNIQUE_CRASH[[:space:]]+).*$/\120000/' config.h \
   && sed -rie 's/^(#[[:space:]]*define[[:space:]]+KEEP_UNIQUE_HANG[[:space:]]+).*$/\120000/' config.h \
