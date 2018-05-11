@@ -41,6 +41,3 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -y \
   && make install \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/*
-
-ENV AFL_EXIT_WHEN_DONE=1
-ENV AFL_HARDEN=1
