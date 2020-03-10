@@ -12,6 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -y \
     llvm-dev \
     g++ \
     gcc \
+    gcc-multilib \
     git \
     libtool \
     libtool-bin \
